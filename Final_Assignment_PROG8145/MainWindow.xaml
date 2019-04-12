@@ -1,0 +1,222 @@
+﻿<Window x:Class="Final_Assignment_PROG8145.MainWindow" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local="clr-namespace:Final_Assignment_PROG8145" mc:Ignorable="d" Title="Alan Hair Salon - Schedule" Height="654" Width="1024" 
+        WindowStartupLocation="CenterScreen" FontSize="16" Closing="Window_Closing" ResizeMode="NoResize">
+
+    <Window.Resources>
+
+        <!--Style for DataGridColumnHeader-->
+        <Style x:Key="columnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#00B1E0"></Setter>
+            <Setter Property="Foreground" Value="#FFFFFF"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Height" Value="40"></Setter>
+            <Setter Property="Padding" Value="10,0,10,0"></Setter>
+            <Setter Property="BorderBrush" Value="#CCCCCC"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <!--<Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>-->
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <!--Style for DataGridCell-->
+        <Style x:Key="cellStyle" TargetType="DataGridCell">
+            <Setter Property="BorderBrush" Value="#CCCCCC"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Setter Property="Height" Value="35"></Setter>
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
+
+        <!--Style for DataGridRowsPresenter-->
+        <Style x:Key="rowStyle" TargetType="DataGridRowsPresenter">
+            <Setter Property="Background" Value="#F0F8FF"></Setter>
+        </Style>
+
+        <!--Style for Calendar of DatePicker Control-->
+        <Style x:Key="styleCalendar" TargetType="{x:Type Calendar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <!-- Wrapping in ViewBox will enlarge calendar of that size.-->
+                        <Viewbox Height="250" Width="250">
+                            <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <local:CustomerEntry x:Key="dataEntry" cName="" cAge="" cPhone=""/>
+    </Window.Resources>
+
+    <Grid Margin="0,0,0,0">
+
+        <!--Input Section-->
+        <Grid HorizontalAlignment="Left" Margin="0,0,0,418" Width="1013" DataContext="{StaticResource dataEntry}" Background="#FF00AFDE">
+
+            <!--Name TextBox Control-->
+            <Label Content="Name:" HorizontalAlignment="Left" Margin="25,25,0,0" VerticalAlignment="Top" Height="29" Width="58" FontSize="16"/>
+            <TextBox x:Name="txtName" Height="29" Margin="90,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" 
+                     Width="194" FontSize="16" Padding="10,0,0,0"
+                     ToolTip="{Binding ElementName=txtName, Path=(Validation.Errors)/ErrorContent, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="TxtName_SelectionChanged">
+                <TextBox.Text>
+                    <Binding Path="cName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:NameRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!--Age TextBox Control-->
+            <Label Content="Age:" HorizontalAlignment="Left" Margin="25,67,0,0" VerticalAlignment="Top" Height="27" FontSize="16"/>
+            <TextBox x:Name="txtAge" HorizontalAlignment="Left" Height="27" Margin="90,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
+                     Width="69" FontSize="16" Padding="10,0,0,0"
+                     ToolTip="{Binding ElementName=txtAge, Path=(Validation.Errors)/ErrorContent, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="TxtAge_SelectionChanged" >
+                <TextBox.Text>
+                    <Binding Path="cAge" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:AgeRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!--Phone TextBox Control-->
+            <Label Content="Phone:" HorizontalAlignment="Left" Margin="25,107,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+            <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="29" Margin="90,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" 
+                     Width="194" FontSize="16" Padding="10,0,0,0" 
+                     ToolTip="{Binding ElementName=txtPhone, Path=(Validation.Errors)/ErrorContent, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="TxtPhone_SelectionChanged">
+                <TextBox.Text>
+                    <Binding Path="cPhone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:PhoneRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!--Gender RadioButton Control-->
+            <Label Content="Gender:" HorizontalAlignment="Left" Margin="25,154,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+            <RadioButton x:Name="rdbMale" Content="Male" HorizontalAlignment="Left" Margin="110,164,0,0" VerticalAlignment="Top" FontSize="16" 
+                         Cursor="Hand" Background="White" IsChecked="True"/>
+            <RadioButton x:Name="rdbFemale" Content="Female" HorizontalAlignment="Left" Margin="189,163,0,0" VerticalAlignment="Top" FontSize="16" 
+                         Width="86" Cursor="Hand"/>
+
+            <!--Service List ComboBox Control-->
+            <Label Content="Service List:" HorizontalAlignment="Left" Margin="315,20,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+            <ComboBox x:Name="cbxServiceList" HorizontalAlignment="Left" Margin="420,22,0,0" VerticalAlignment="Top" Width="243" Height="29" 
+                      FontSize="16" Cursor="Hand" IsReadOnly="True" SelectionChanged="CbxServiceList_SelectionChanged">
+                <ComboBoxItem Content="--Select your service--" IsSelected="True"/>
+            </ComboBox>
+
+            <!--Provider List ComboBox Control-->
+            <Label Content="Provider:" HorizontalAlignment="Left" Margin="334,67,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+            <ComboBox x:Name="cbxProvider" HorizontalAlignment="Left" Margin="420,68,0,0" VerticalAlignment="Top" Width="243" Height="29" 
+                      FontSize="16" Cursor="Hand" IsReadOnly="True" SelectionChanged="CbxProvider_SelectionChanged">
+                <ComboBoxItem Content="--Select your provider--" IsSelected="True"/>
+            </ComboBox>
+
+            <!--Location List ComboBox Control-->
+            <Label Content="Salon Location:" HorizontalAlignment="Left" Margin="696,33,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+            <ComboBox x:Name="cbxLocation" HorizontalAlignment="Left" Margin="702,68,0,0" VerticalAlignment="Top" Width="278" Height="29" 
+                      FontSize="16" Cursor="Hand" IsReadOnly="True" SelectionChanged="CbxLocation_SelectionChanged">
+                <ComboBoxItem Content="--Select salon's location--" IsSelected="True"/>
+            </ComboBox>
+
+            <!--DatePicker Control-->
+            <DatePicker x:Name="dpkDate" HorizontalAlignment="Left" Margin="420,116,0,0" 
+                        VerticalAlignment="Top" Width="243" Height="29" FontSize="16"
+                         CalendarStyle="{StaticResource styleCalendar}" SelectedDateChanged="DpkDate_SelectedDateChanged">
+                <DatePicker.Resources>
+                    <Style TargetType="DatePickerTextBox">
+                        <Setter Property="IsReadOnly" Value="True"/>
+                    </Style>
+                </DatePicker.Resources>
+            </DatePicker>
+            <Label Content="Date:" HorizontalAlignment="Left" Margin="359,114,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+
+            <!--Add Button-->
+            <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="Left" Margin="897,142,0,0" VerticalAlignment="Top" Width="83" Height="41" 
+                    Click="BtnAdd_Click" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
+
+            <!--Time ComboBox Control-->
+            <Label Content="Time" HorizontalAlignment="Left" Margin="359,160,0,0" VerticalAlignment="Top" Height="29" FontSize="16"/>
+            <ComboBox x:Name="cbxTime" HorizontalAlignment="Left" Margin="420,160,0,0" VerticalAlignment="Top" Width="243" Height="29" FontSize="16" Cursor="Hand" IsReadOnly="True" SelectionChanged="CbxTime_SelectionChanged">
+                <ComboBoxItem Content="--Select your time in day--" IsSelected="True"/>
+            </ComboBox>
+
+            <!--Update Button-->
+            <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="798,141,0,0" VerticalAlignment="Top" Width="80" Height="41" 
+                    Click="BtnUpdate_Click" FontWeight="Bold" FontSize="16" Cursor="Hand"/>
+
+            <!--Delete Button-->
+            <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="702,141,0,0" VerticalAlignment="Top" Width="76" Height="41" 
+                    FontWeight="Bold" FontSize="16" Cursor="Hand" Click="BtnDelete_Click"/>
+
+        </Grid>
+
+        <!--List Section-->
+        <Grid HorizontalAlignment="Left" Margin="0,205,0,0" Width="1013" Background="AliceBlue" Height="416" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="970*"/>
+                <ColumnDefinition Width="43*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--Filter Section-->
+            <TextBox x:Name="txtFilter" Height="29" Margin="733,22,68,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+            <Button x:Name="btnFilter" Content="Filter" HorizontalAlignment="Left" Margin="920,21,0,0" VerticalAlignment="Top" Width="68" Height="30" 
+                    Click="BtnFilter_Click" FontWeight="Bold" Cursor="Hand" Grid.ColumnSpan="2"/>
+            <Label Content="Filter by Name" HorizontalAlignment="Left" Margin="611,21,0,0" VerticalAlignment="Top" Height="30" Width="122" 
+                   RenderTransformOrigin="-0.602,0.464" FontWeight="Bold"/>
+
+            <!--DataGrid Section-->
+            <DataGrid x:Name="gridSchedule" 
+                      Height="320" 
+                      Margin="25,71,25,0" 
+                      VerticalAlignment="Top"
+                      ItemsSource="{Binding Path=Schedule}" IsReadOnly="True"
+                      AutoGenerateColumns="False" SelectionChanged="GridSchedule_SelectionChanged" Background="#FFBEDCF5" 
+                      ColumnHeaderStyle="{DynamicResource columnHeaderStyle}" 
+                      CellStyle="{DynamicResource cellStyle}"
+                      AlternatingRowBackground="#F0F8FF" SelectionMode="Single" GridLinesVisibility="None" Grid.ColumnSpan="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Age" Binding="{Binding Age}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Service" Binding="{Binding Service}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Provider" Binding="{Binding Provider}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Time" Binding="{Binding Time}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Location" Binding="{Binding Location}"></DataGridTextColumn>
+                    <!--<DataGridTemplateColumn Header="Edit">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button Content="Edit" Click="BtnEdit_Click"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button Content="Delete" Click="BtnDelete_Click"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--Total Records View-->
+            <Label Content="Total Records:" HorizontalAlignment="Left" Margin="21,21,0,0" VerticalAlignment="Top" Height="29" Width="116" RenderTransformOrigin="-0.602,0.464" FontWeight="Bold"/>
+            <Label x:Name="lblTotalRecords" Content="0" HorizontalAlignment="Left" Margin="137,21,0,0" VerticalAlignment="Top" Height="29" Width="42" RenderTransformOrigin="-0.602,0.464" FontWeight="Bold"/>
+        </Grid>
+    </Grid>
+</Window>
