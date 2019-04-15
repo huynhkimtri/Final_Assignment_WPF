@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Appointments>
+	<Appointment>
+		<Name>Jeanette Reyes</Name>
+		<Age>31</Age>
+		<Phone>2342342344</Phone>
+		<Gender>Male</Gender>
+		<Service>Brucedale</Service>
+		<Provider>Emily Winders</Provider>
+		<Date>05/24/2019</Date>
+		<Time>12PM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Constance Edwards</Name>
+		<Age>19</Age>
+		<Phone>98089089879</Phone>
+		<Gender>Male</Gender>
+		<Service>Conditioning Treatment</Service>
+		<Provider>Mel VanderBom</Provider>
+		<Date>05/28/2019</Date>
+		<Time>2PM</Time>
+		<Location>24-A Avogadro Way, Remulade City, WA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Yvette Sharp</Name>
+		<Age>34</Age>
+		<Phone>1231231231</Phone>
+		<Gender>Male</Gender>
+		<Service>Single Process Color Retouch</Service>
+		<Provider>Brittany Massey</Provider>
+		<Date>04/17/2019</Date>
+		<Time>10AM</Time>
+		<Location>89 Madison St, Fremont City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Leroy Love</Name>
+		<Age>55</Age>
+		<Phone>12345754332</Phone>
+		<Gender>Female</Gender>
+		<Service>Keratin Express</Service>
+		<Provider>Emily Winders</Provider>
+		<Date>05/30/2019</Date>
+		<Time>10AM</Time>
+		<Location>567 Pasadena Ave, Tustin City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Ian Andrews</Name>
+		<Age>36</Age>
+		<Phone>3455434554</Phone>
+		<Gender>Male</Gender>
+		<Service>Keratin Express</Service>
+		<Provider>Brittany Massey</Provider>
+		<Date>05/16/2019</Date>
+		<Time>6PM</Time>
+		<Location>679 Carson St, Portland City, OR</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Kristine Pratt</Name>
+		<Age>45</Age>
+		<Phone>11112222333</Phone>
+		<Gender>Male</Gender>
+		<Service>Double Process Blonde Retouch</Service>
+		<Provider>Samantha Hayes</Provider>
+		<Date>05/28/2019</Date>
+		<Time>11AM</Time>
+		<Location>788 Catamaugus Ave, Seattle City, WA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Hope Frank</Name>
+		<Age>23</Age>
+		<Phone>5646546546</Phone>
+		<Gender>Male</Gender>
+		<Service>Hotheads Application</Service>
+		<Provider>Adrienne Mason</Provider>
+		<Date>05/30/2019</Date>
+		<Time>5PM</Time>
+		<Location>788 Catamaugus Ave, Seattle City, WA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Sophie Henry</Name>
+		<Age>25</Age>
+		<Phone>8787576767</Phone>
+		<Gender>Female</Gender>
+		<Service>Face Framing Balayage</Service>
+		<Provider>Jaime Lewis</Provider>
+		<Date>05/30/2019</Date>
+		<Time>10AM</Time>
+		<Location>788 Catamaugus Ave, Seattle City, WA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Sonja Murphy</Name>
+		<Age>43</Age>
+		<Phone>6789987678</Phone>
+		<Gender>Female</Gender>
+		<Service>Women's Haircut</Service>
+		<Provider>Danielle Bruce</Provider>
+		<Date>05/28/2019</Date>
+		<Time>4PM</Time>
+		<Location>89 Madison St, Fremont City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>Teresa Hamilton</Name>
+		<Age>22</Age>
+		<Phone>09898989898</Phone>
+		<Gender>Male</Gender>
+		<Service>Gloss Treatment/Toner</Service>
+		<Provider>Jaime Lewis</Provider>
+		<Date>06/11/2019</Date>
+		<Time>11AM</Time>
+		<Location>567 Pasadena Ave, Tustin City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>xx</Name>
+		<Age>34</Age>
+		<Phone>2342342343</Phone>
+		<Gender>Male</Gender>
+		<Service>Blowout/Iron Work</Service>
+		<Provider>Danielle Bruce</Provider>
+		<Date>04/03/2019</Date>
+		<Time>8AM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>ccc</Name>
+		<Age>34</Age>
+		<Phone>3453453455</Phone>
+		<Gender>Male</Gender>
+		<Service>Consultation</Service>
+		<Provider>Danielle Bruce</Provider>
+		<Date>04/03/2019</Date>
+		<Time>10AM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>cc</Name>
+		<Age>34</Age>
+		<Phone>3453453455</Phone>
+		<Gender>Male</Gender>
+		<Service>Consultation</Service>
+		<Provider>Danielle Bruce</Provider>
+		<Date>04/03/2019</Date>
+		<Time>10AM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>xcvxcv</Name>
+		<Age>45</Age>
+		<Phone>345345345345</Phone>
+		<Gender>Male</Gender>
+		<Service>Blowout</Service>
+		<Provider>Emily Winders</Provider>
+		<Date>04/17/2019</Date>
+		<Time>8AM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>cc</Name>
+		<Age>34</Age>
+		<Phone>23423423434</Phone>
+		<Gender>Male</Gender>
+		<Service>Brucedale</Service>
+		<Provider>Danielle Bruce</Provider>
+		<Date>04/09/2019</Date>
+		<Time>11AM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>dsf</Name>
+		<Age>32</Age>
+		<Phone>3434334343</Phone>
+		<Gender>Male</Gender>
+		<Service>Men's Haircut</Service>
+		<Provider>Danielle Bruce</Provider>
+		<Date>04/09/2019</Date>
+		<Time>3PM</Time>
+		<Location>577 First St, Los Gatos City, CA</Location>
+	</Appointment>
+	<Appointment>
+		<Name>sdfsdf</Name>
+		<Age>22</Age>
+		<Phone>23232323232</Phone>
+		<Gender>Male</Gender>
+		<Service>Blowout/Iron Work</Service>
+		<Provider>Brittany Massey</Provider>
+		<Date>04/03/2019</Date>
+		<Time>9AM</Time>
+		<Location>24-A Avogadro Way, Remulade City, WA</Location>
+	</Appointment>
+</Appointments>

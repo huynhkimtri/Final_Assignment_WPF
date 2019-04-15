@@ -75,6 +75,7 @@
     </ApplicationDefinition>
     <Compile Include="AgeRule.cs" />
     <Compile Include="Appointments.cs" />
+    <Compile Include="BrushConverter.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerEntry.cs" />
     <Compile Include="NameRule.cs" />

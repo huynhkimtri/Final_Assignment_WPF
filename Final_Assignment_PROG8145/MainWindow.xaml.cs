@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -174,23 +175,52 @@ namespace Final_Assignment_PROG8145
                     newCustomer.Time = timeList[cbxTime.SelectedIndex - 1];
                     newCustomer.Location = locationList[cbxLocation.SelectedIndex - 1];
 
-                    Schedule.Insert(0, newCustomer);
-                    appointments.AddItem(newCustomer);
-                    gridSchedule.ItemsSource = (gridSchedule.ItemsSource != Schedule) ? Schedule : gridSchedule.ItemsSource;
-                    clearInputControl();
-                    getTotalRecords();
-                    saveToXML();
+
+                    int flag = checkValidateInputControl(newCustomer);
+                    if (flag == 0)
+                    {
+                        Schedule.Insert(0, newCustomer);
+                        appointments.AddItem(newCustomer);
+                        gridSchedule.ItemsSource = (gridSchedule.ItemsSource != Schedule) ? Schedule : gridSchedule.ItemsSource;
+                        clearInputControl();
+                        getTotalRecords();
+                        saveToXML();
+                    }
+                    else if (checkValidateInputControl(newCustomer) == 1)
+                    {
+                        MessageBox.Show("This booked has been saved in the system.\nPlease enter new booked.", "Notification",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if (flag == 2)
+                    {
+                        MessageBox.Show("This booking was unsuccessful, because of the previous reservation.\nPlease enter new booked.",
+                            "Notification",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if (flag == 3)
+                    {
+                        MessageBox.Show("This booking was unsuccessful, because at the same time, " +
+                            "the provider cannot work in two different locations.\nPlease enter new booked.", "Notification",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if (flag == 4)
+                    {
+                        MessageBox.Show("This booking was unsuccessful, Because at the same time, " +
+                            "the provider cannot serve many different services.\nPlease enter new booked.", "Notification",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
                 else
                 {
                     MessageBoxImage icon = MessageBoxImage.Question;
                     MessageBox.Show("Please complete and accurate information!\n" +
                         "Tip: Check the red fields and see the tooltips of each input box " +
-                        "so that you can enter the information exactly.", 
-                        "Notification", MessageBoxButton.OK ,icon);
+                        "so that you can enter the information exactly.",
+                        "Notification", MessageBoxButton.OK, icon);
                 }
             }
         }
+
 
         private void BtnUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -207,7 +237,6 @@ namespace Final_Assignment_PROG8145
                 {
                     updateDataGridRow(customerGridView);
                     saveToXML();
-                    btnUpdate.Content = "Edit";
                 }
             }
             else
@@ -218,7 +247,7 @@ namespace Final_Assignment_PROG8145
 
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            
+
             try
             {
                 Customer customerDelete = (Customer)gridSchedule.SelectedItem;
@@ -243,11 +272,11 @@ namespace Final_Assignment_PROG8145
                     saveToXML();
                     btnDelete.IsEnabled = false;
                     btnUpdate.IsEnabled = false;
-                } 
+                }
             }
             catch (Exception)
             {
-               
+
             }
         }
 
@@ -279,6 +308,45 @@ namespace Final_Assignment_PROG8145
             getTotalRecords();
         }
 
+
+        private int checkValidateInputControl(Customer cus)
+        {
+
+            foreach (var customer in Schedule)
+            {
+                if (customer.Name.Equals(cus.Name) && customer.Age.Equals(cus.Age) &&
+                    customer.Phone.Equals(cus.Phone) && customer.Service.Equals(cus.Service) &&
+                    customer.Provider.Equals(cus.Provider) && customer.Date.Equals(cus.Date) &&
+                    customer.Location.Equals(cus.Location) && customer.Time.Equals(cus.Time))
+                {
+                    return 1;
+                }
+
+                if (customer.Service.Equals(cus.Service) &&
+                   customer.Provider.Equals(cus.Provider) && customer.Date.Equals(cus.Date) &&
+                   customer.Location.Equals(cus.Location) && customer.Time.Equals(cus.Time))
+                {
+                    return 2;
+                }
+
+                if (customer.Service.Equals(cus.Service) &&
+                   customer.Provider.Equals(cus.Provider) && customer.Date.Equals(cus.Date) &&
+                   !customer.Location.Equals(cus.Location) && customer.Time.Equals(cus.Time))
+                {
+                    return 3;
+                }
+
+                if (!customer.Service.Equals(cus.Service) &&
+                   customer.Provider.Equals(cus.Provider) && customer.Date.Equals(cus.Date) &&
+                   customer.Location.Equals(cus.Location) && customer.Time.Equals(cus.Time))
+                {
+                    return 4;
+                }
+
+            }
+            return 0;
+
+        }
         /// <summary>
         /// The function displays detailed information of a row in the DataGrid, all information appears in the input control.
         /// </summary>
@@ -460,7 +528,8 @@ namespace Final_Assignment_PROG8145
             {
                 isValid = false;
                 txtName.BorderBrush = Brushes.Red;
-            } else
+            }
+            else
             {
                 txtName.BorderBrush = null;
             }
@@ -468,7 +537,8 @@ namespace Final_Assignment_PROG8145
             {
                 isValid = false;
                 txtAge.BorderBrush = Brushes.Red;
-            } else
+            }
+            else
             {
                 txtAge.BorderBrush = null;
             }
@@ -476,7 +546,8 @@ namespace Final_Assignment_PROG8145
             {
                 isValid = false;
                 txtPhone.BorderBrush = Brushes.Red;
-            } else
+            }
+            else
             {
                 txtPhone.BorderBrush = null;
             }
@@ -499,10 +570,11 @@ namespace Final_Assignment_PROG8145
             {
                 cbxProvider.Foreground = Brushes.Black;
             }
-            if(!dpkDate.SelectedDate.HasValue)
+            if (!dpkDate.SelectedDate.HasValue)
             {
                 dpkDate.Foreground = Brushes.Red;
-            } else
+            }
+            else
             {
                 dpkDate.Foreground = Brushes.Black;
             }
@@ -551,7 +623,7 @@ namespace Final_Assignment_PROG8145
             DateTime? dateValue = dpkDate.SelectedDate;
             if (dateValue.HasValue)
             {
-                date = dateValue.Value.ToString("MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                date = dateValue.Value.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture);
             }
             string g1 = rdbFemale.Content.ToString();
             string g2 = (Convert.ToBoolean(rdbMale.IsChecked) ? rdbMale.Content.ToString() : g1);
@@ -564,16 +636,44 @@ namespace Final_Assignment_PROG8145
             string location = this.cbxLocation.SelectedValue.ToString();
             Customer customerToUpdate = new Customer(name, age, phone, gender, service, provider, date, time, location);
 
-            // Update data in Schedulem, appointments, gridSchedule.
-            int indexSelect = gridSchedule.SelectedIndex;
-            Schedule.RemoveAt(indexSelect);
-            Schedule.Insert(indexSelect, customerToUpdate);
-            appointments.RemoveItem(customerGridView);
-            appointments.AddItem(customerToUpdate);
-            gridSchedule.ItemsSource = (gridSchedule.ItemsSource != Schedule) ? Schedule : gridSchedule.ItemsSource;
-            gridSchedule.CurrentItem = gridSchedule.Items[indexSelect];
-            MessageBox.Show("Updated successfully!", "Update Records", MessageBoxButton.OK, MessageBoxImage.Information);
-
+            // Check update
+            int flag = checkValidateInputControl(customerToUpdate);
+            if (flag == 0)
+            {
+                // Update data in Schedulem, appointments, gridSchedule.
+                int indexSelect = gridSchedule.SelectedIndex;
+                Schedule.RemoveAt(indexSelect);
+                Schedule.Insert(indexSelect, customerToUpdate);
+                appointments.RemoveItem(customerGridView);
+                appointments.AddItem(customerToUpdate);
+                gridSchedule.ItemsSource = (gridSchedule.ItemsSource != Schedule) ? Schedule : gridSchedule.ItemsSource;
+                gridSchedule.CurrentItem = gridSchedule.Items[indexSelect];
+                MessageBox.Show("Updated successfully!", "Update Records", MessageBoxButton.OK, MessageBoxImage.Information);
+                btnUpdate.Content = "Edit";
+            }
+            //else if (checkValidateInputControl(customerToUpdate) == 1)
+            //{
+            //    MessageBox.Show("This booked has been saved in the system.\nPlease enter new booked.", "Notification",
+            //    MessageBoxButton.OK, MessageBoxImage.Information);
+            //}
+            else if (flag == 2)
+            {
+                MessageBox.Show("This booking was unsuccessful, because of the previous reservation.\nPlease enter new booked.",
+                    "Notification",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (flag == 3)
+            {
+                MessageBox.Show("This booking was unsuccessful, because at the same time, " +
+                    "the provider cannot work in two different locations.\nPlease enter new booked.", "Notification",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if (flag == 4)
+            {
+                MessageBox.Show("This booking was unsuccessful, Because at the same time, " +
+                    "the provider cannot serve many different services.\nPlease enter new booked.", "Notification",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>
@@ -686,7 +786,7 @@ namespace Final_Assignment_PROG8145
             txtPhone.BorderBrush = null;
         }
 
-        
+
     }
 
 

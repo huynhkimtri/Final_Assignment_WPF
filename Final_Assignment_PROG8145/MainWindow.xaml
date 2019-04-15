@@ -8,6 +8,11 @@
 
     <Window.Resources>
 
+        <!--Brush Converter-->
+        <local:BrushConverter x:Key="DataConverter"/>
+
+        <local:CustomerEntry x:Key="dataEntry" cName="" cAge="" cPhone=""/>
+        
         <!--Style for DataGridColumnHeader-->
         <Style x:Key="columnHeaderStyle" TargetType="DataGridColumnHeader">
             <Setter Property="Background" Value="#00B1E0"></Setter>
@@ -24,11 +29,12 @@
 
         <!--Style for DataGridCell-->
         <Style x:Key="cellStyle" TargetType="DataGridCell">
-            <Setter Property="BorderBrush" Value="#CCCCCC"></Setter>
+            <!--<Setter Property="BorderBrush" Value="#CCCCCC"></Setter>-->
             <Setter Property="BorderThickness" Value="1"></Setter>
             <Setter Property="Height" Value="35"></Setter>
             <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <!--<Setter Property="BorderBrush" Value="{Binding Path=., Converter={StaticResource DataConverter}}"/>-->
         </Style>
 
         <!--Style for DataGridRowsPresenter-->
@@ -53,7 +59,7 @@
             </Setter>
         </Style>
 
-        <local:CustomerEntry x:Key="dataEntry" cName="" cAge="" cPhone=""/>
+        
     </Window.Resources>
 
     <Grid Margin="0,0,0,0">
@@ -187,7 +193,13 @@
                       ColumnHeaderStyle="{DynamicResource columnHeaderStyle}" 
                       CellStyle="{DynamicResource cellStyle}"
                       AlternatingRowBackground="#F0F8FF" SelectionMode="Single" GridLinesVisibility="None" Grid.ColumnSpan="2">
-                <DataGrid.Columns>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Foreground" Value="{Binding Path=., Converter={StaticResource DataConverter}}"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                
+              <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" ></DataGridTextColumn>
                     <DataGridTextColumn Header="Age" Binding="{Binding Age}"></DataGridTextColumn>
                     <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"></DataGridTextColumn>
